@@ -322,6 +322,12 @@ void SdlInputHandler::updateKeyboardGrabState()
         shouldGrab = false;
     }
 
+    if (m_CaptureSystemKeysMode == StreamingPreferences::CSK_HOVERED &&
+            !(windowFlags & SDL_WINDOW_MOUSE_FOCUS)) {
+        // Ungrab if it's fullscreen only and we left fullscreen
+        shouldGrab = false;
+    }
+
     // Don't close the window on Alt+F4 when keyboard grab is enabled
     SDL_SetHint(SDL_HINT_WINDOWS_NO_CLOSE_ON_ALT_F4, shouldGrab ? "1" : "0");
 
@@ -356,6 +362,11 @@ bool SdlInputHandler::isSystemKeyCaptureActive()
 
     if (m_CaptureSystemKeysMode == StreamingPreferences::CSK_FULLSCREEN &&
             !(windowFlags & SDL_WINDOW_FULLSCREEN)) {
+        return false;
+    }
+
+    if (m_CaptureSystemKeysMode == StreamingPreferences::CSK_HOVERED &&
+            !(windowFlags & SDL_WINDOW_MOUSE_FOCUS)) {
         return false;
     }
 

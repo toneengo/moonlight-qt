@@ -102,6 +102,7 @@ public:
         CSK_OFF,
         CSK_FULLSCREEN,
         CSK_ALWAYS,
+        CSK_HOVERED,
     };
     Q_ENUM(CaptureSysKeysMode);
 

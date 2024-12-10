@@ -1325,6 +1325,10 @@ Flickable {
                                 text: qsTr("always")
                                 val: StreamingPreferences.CSK_ALWAYS
                             }
+                            ListElement {
+                                text: qsTr("when hovered")
+                                val: StreamingPreferences.CSK_HOVERED
+                            }
                         }
 
                         function updatePref() {
